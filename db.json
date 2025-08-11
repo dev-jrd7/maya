@@ -1,32 +1,34 @@
-[
-    {
-        "userId": 1,
-        "id": 101,
-        "transactionPurpose": "Salary Payment",
-        "amount": "5000"
-    },
-    {
-        "userId": 2,
-        "id": 102,
-        "transactionPurpose": "Grocery Shopping",
-        "amount": "120.75"
-    },
-    {
-        "userId": 1,
-        "id": 103,
-        "transactionPurpose": "Electricity Bill",
-        "amount": "89.30"
-    },
-    {
-        "userId": 3,
-        "id": 104,
-        "transactionPurpose": "Car Repair",
-        "amount": "450.00"
-    },
-    {
-        "userId": 2,
-        "id": 105,
-        "transactionPurpose": "Freelance Payment",
-        "amount": "1300"
-    }
-]
+{
+    "transactions": [
+        {
+            "userId": 1,
+            "id": 101,
+            "transactionPurpose": "Salary Payment",
+            "amount": "5000"
+        },
+        {
+            "userId": 2,
+            "id": 102,
+            "transactionPurpose": "Grocery Shopping",
+            "amount": "120.75"
+        },
+        {
+            "userId": 1,
+            "id": 103,
+            "transactionPurpose": "Electricity Bill",
+            "amount": "89.30"
+        },
+        {
+            "userId": 3,
+            "id": 104,
+            "transactionPurpose": "Car Repair",
+            "amount": "450.00"
+        },
+        {
+            "userId": 2,
+            "id": 105,
+            "transactionPurpose": "Freelance Payment",
+            "amount": "1300"
+        }
+    ]
+}
