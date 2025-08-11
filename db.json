@@ -4,32 +4,32 @@
         {
             "userId": 1,
             "id": 101,
-            "title": "Salary Payment",
-            "body": "5000"
+            "transactionPurpose": "Salary Payment",
+            "amount": "5000"
         },
         {
             "userId": 2,
             "id": 102,
-            "title": "Grocery Shopping",
-            "body": "120.75"
+            "transactionPurpose": "Grocery Shopping",
+            "amount": "120.75"
         },
         {
             "userId": 1,
             "id": 103,
-            "title": "Electricity Bill",
-            "body": "89.30"
+            "transactionPurpose": "Electricity Bill",
+            "amount": "89.30"
         },
         {
             "userId": 3,
             "id": 104,
-            "title": "Car Repair",
-            "body": "450.00"
+            "transactionPurpose": "Car Repair",
+            "amount": "450.00"
         },
         {
             "userId": 2,
             "id": 105,
-            "title": "Freelance Payment",
-            "body": "1300"
+            "transactionPurpose": "Freelance Payment",
+            "amount": "1300"
         }
     ]
 }
