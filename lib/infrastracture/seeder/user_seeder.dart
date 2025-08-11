@@ -23,52 +23,52 @@ class UserSeeder extends Seeder {
     // Populate the _data list with sample user data
     _data = [
       MayaUserEntities(
-          userid: 1001, // Simple, multi-digit user ID
+          userid: 1, // Simple, multi-digit user ID
           username: 'testaccount1',
           password: 'P@ssw0rd123!',
           balance: 50000),
       MayaUserEntities(
-          userid: 1002,
+          userid: 2,
           username: 'testaccount2',
           password: 'Str0ngP@ssw0rd!',
           balance: 60000),
       MayaUserEntities(
-          userid: 1003,
+          userid: 3,
           username: 'testaccount3',
           password: 'S3cure@P@ss2023',
           balance: 70000),
       MayaUserEntities(
-          userid: 1004,
+          userid: 4,
           username: 'testaccount4',
           password: 'P@ssw0rd456!',
           balance: 80000),
       MayaUserEntities(
-          userid: 1005,
+          userid: 5,
           username: 'testaccount5',
           password: 'Qwerty@123#',
           balance: 90000),
       MayaUserEntities(
-          userid: 1006,
+          userid: 6,
           username: 'testaccount6',
           password: 'Str0ng!Passw0rd',
           balance: 100000),
       MayaUserEntities(
-          userid: 1007,
+          userid: 7,
           username: 'testaccount7',
           password: 'Maya@2023#Strong',
           balance: 100000),
       MayaUserEntities(
-          userid: 1008,
+          userid: 8,
           username: 'testaccount8',
           password: 'Secure!P@ssw0rd123',
           balance: 100000),
       MayaUserEntities(
-          userid: 1009,
+          userid: 9,
           username: 'testaccount9',
           password: 'Test@456P@ss!',
           balance: 100000),
       MayaUserEntities(
-          userid: 1010,
+          userid: 10,
           username: 'testaccount10',
           password: 'P@ssw0rd789#',
           balance: 100000),

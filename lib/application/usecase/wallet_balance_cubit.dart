@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// - `toggle(bool hasToggle)`: Updates the state based on the given `hasToggle` value.
 /// - `hasToggle`: A getter that returns the current state of the toggle (whether it's on or off).
 final class WalletBalanceCubit extends Cubit<bool> {
-  WalletBalanceCubit() : super(false);
+  WalletBalanceCubit() : super(true);
 
   // Toggles the wallet balance state based on the provided value.
   void toggle(bool hasToggle) => emit(hasToggle);

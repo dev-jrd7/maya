@@ -1,28 +1,15 @@
-import 'package:codenic_logger/codenic_logger.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maya/application/parameters/maya_transaction_parameters.dart';
 import 'package:maya/domain/model/abstracts/exceptions/app_failure.dart';
-import 'package:maya/domain/model/abstracts/network/http_client.dart';
 import 'package:maya/domain/model/entities/maya_transactions_entities.dart';
-import 'package:maya/domain/services/maya_services/maya_transaction_service_impl.dart';
-
-import 'maya_codenic_logger.dart';
-import 'maya_http_client_mock.dart';
+import 'maya_transaction_service_mock.dart';
 
 void main() {
-  late HttpClient httpClient;
-  late CodenicLogger codenicLogger;
-  late MayaTransactionServiceImpl serviceImplementation;
+  late MayaTransactionServiceMock serviceImplementation;
 
   setUp(() {
-    httpClient = MayaHttpClientMock();
-    codenicLogger = MayaCodenicLogger();
-
-    serviceImplementation = MayaTransactionServiceImpl(
-      httpClient: httpClient,
-      codenicLogger: codenicLogger,
-    );
+    serviceImplementation = MayaTransactionServiceMock();
   });
 
   group(
@@ -30,7 +17,7 @@ void main() {
     () {
       test('Get list of transactions', () async {
         final Either<AppFailure, List<MayaTransactionsEntities>> result =
-            await serviceImplementation.getTransactions();
+            await serviceImplementation.getTransactions(userId: 1);
 
         // Assert
         result.fold(
@@ -48,9 +35,8 @@ void main() {
             await serviceImplementation.postTransaction(
           mayaTransactionParameters: MayaTransactionParameters(
             userId: 10,
-            id: 202,
-            title: '200.00',
-            body: 'The transaction failed. Please check your account balance.',
+            purpose: '200.00',
+            amount: 'The transaction failed. Please check your account balance.',
           ),
         );
 
@@ -64,7 +50,6 @@ void main() {
           (transaction) {
             // Handle success case (Right side)
             expect(transaction, isA<MayaTransactionsEntities>());
-            expect(transaction.id, 202);
             expect(transaction.transactionPurpose, '200.00'); // Check if the transactionPurpose matches
             expect(transaction.amount,
                 'The transaction failed. Please check your account balance.'); // Check if the amount matches

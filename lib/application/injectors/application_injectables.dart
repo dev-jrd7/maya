@@ -32,6 +32,10 @@ Future<void> applicationInjectables(GetIt serviceLocator) async {
     ),
   );
 
+  serviceLocator.registerFactory<MayaTransactionsLocalCubit>(
+    () => MayaTransactionsLocalCubit(),
+  );
+
   serviceLocator.registerFactory(
     () => MayaAuthLogoutCubit(
       mayaAuthService: serviceLocator<AMayaAuthService>(),

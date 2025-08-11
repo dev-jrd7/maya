@@ -44,6 +44,6 @@ final class MayaFetchTransactionsCubit extends AppCubit<
     MayaTransactionParameters? param,
   }) {
     // Calls the service layer to fetch transactions based on userId from the parameters.
-    return _mayaTransactionService.getTransactions();
+    return _mayaTransactionService.getTransactions(userId: param!.userId);
   }
 }

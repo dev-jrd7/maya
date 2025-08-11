@@ -10,7 +10,7 @@ part of 'http_client.dart';
 
 class _HttpClient implements HttpClient {
   _HttpClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://jsonplaceholder.typicode.com';
+    baseUrl ??= 'https://my-json-server.typicode.com/dev-jrd7/maya';
   }
 
   final Dio _dio;
@@ -20,28 +20,28 @@ class _HttpClient implements HttpClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<MayaAuthTransactionsDTO>> getTransactions() async {
+  Future<List<MayaTransactionsDTO>> getTransactions(int userId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'userId': userId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<MayaAuthTransactionsDTO>>(
+    final _options = _setStreamType<List<MayaTransactionsDTO>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/posts',
+            '/transactions',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<MayaAuthTransactionsDTO> _value;
+    late List<MayaTransactionsDTO> _value;
     try {
       _value = _result.data!
           .map(
             (dynamic i) =>
-                MayaAuthTransactionsDTO.fromJson(i as Map<String, dynamic>),
+                MayaTransactionsDTO.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -52,29 +52,30 @@ class _HttpClient implements HttpClient {
   }
 
   @override
-  Future<MayaAuthTransactionsDTO?> postTransactions(
-    Map<String, dynamic> transactions,
+  Future<MayaTransactionsDTO?> postTransactions(
+    Map<String, dynamic>? transactions,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MayaAuthTransactionsDTO>(
+    final Map<String, dynamic>? _data = transactions;
+    final _options = _setStreamType<MayaTransactionsDTO>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/posts',
+            '/transactions',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late MayaAuthTransactionsDTO? _value;
+    late MayaTransactionsDTO? _value;
     try {
       _value = _result.data == null
           ? null
-          : MayaAuthTransactionsDTO.fromJson(_result.data!);
+          : MayaTransactionsDTO.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

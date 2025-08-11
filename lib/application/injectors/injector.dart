@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import '../usecase/maya_auth_logout_cubit.dart';
 import '../usecase/maya_check_session_cubit.dart';
 import '../usecase/maya_fetch_transactions_cubit.dart';
+import '../usecase/maya_transactions_local_cubit.dart';
 import '../usecase/wallet_balance_cubit.dart';
 import '../../domain/model/abstracts/network/http_client.dart';
 import '../../domain/model/abstracts/maya_services/maya_transaction_service.dart';

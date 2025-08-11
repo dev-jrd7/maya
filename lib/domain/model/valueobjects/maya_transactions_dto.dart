@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../entities/maya_transactions_entities.dart';
 import '../interfaces/entity_mapper.dart';
 
-part 'maya_auth_transactions_dto.g.dart';
+part 'maya_transactions_dto.g.dart';
 
 /// DTO (Data Transfer Object) for handling authenticated Maya transactions.
 ///
@@ -23,32 +23,32 @@ part 'maya_auth_transactions_dto.g.dart';
 /// - [toEntity]: Converts this DTO into a [MayaTransactionsEntities] object,
 ///   which can be used in the domain layer.
 @JsonSerializable()
-class MayaAuthTransactionsDTO
+class MayaTransactionsDTO
     implements IEntityMapper<MayaTransactionsEntities> {
   final int? userId;
   final int? id;
-  final String? title;
-  final String? body;
+  final String? transactionPurpose;
+  final String? amount;
 
-  MayaAuthTransactionsDTO({
+  MayaTransactionsDTO({
     required this.userId,
-    required this.id,
-    required this.title,
-    required this.body,
+    this.id,
+    required this.transactionPurpose,
+    required this.amount,
   });
 
-  factory MayaAuthTransactionsDTO.fromJson(Map<String, dynamic> json) =>
-      _$MayaAuthTransactionsDTOFromJson(json);
+  factory MayaTransactionsDTO.fromJson(Map<String, dynamic> json) =>
+      _$MayaTransactionsDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MayaAuthTransactionsDTOToJson(this);
+  Map<String, dynamic> toJson() => _$MayaTransactionsDTOToJson(this);
 
   @override
   MayaTransactionsEntities toEntity() {
     return MayaTransactionsEntities(
       userId: userId,
       id: id,
-      transactionPurpose: title,
-      amount: body,
+      transactionPurpose: transactionPurpose,
+      amount: amount,
     );
   }
 }

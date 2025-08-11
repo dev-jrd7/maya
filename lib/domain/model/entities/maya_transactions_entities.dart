@@ -6,7 +6,7 @@ class MayaTransactionsEntities {
 
   MayaTransactionsEntities({
     required this.userId,
-    required this.id,
+    this.id,
     required this.transactionPurpose,
     required this.amount,
   });

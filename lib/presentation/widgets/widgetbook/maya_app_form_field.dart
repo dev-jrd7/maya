@@ -59,7 +59,9 @@ class _MayaAppFormFieldState extends State<MayaAppFormField> {
               });
             }
           }
-          widget.onChanged!(data);
+          if (widget.onChanged != null) {
+            widget.onChanged!(data);
+          }
         },
         maxLength: widget.maxLength,
         validator: (value) {

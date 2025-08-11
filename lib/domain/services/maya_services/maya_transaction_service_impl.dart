@@ -8,7 +8,7 @@ import '../../model/abstracts/exceptions/app_failure.dart';
 import '../../model/abstracts/network/http_client.dart';
 import '../../model/entities/maya_transactions_entities.dart';
 import '../../model/abstracts/maya_services/maya_transaction_service.dart';
-import '../../model/valueobjects/maya_auth_transactions_dto.dart';
+import '../../model/valueobjects/maya_transactions_dto.dart';
 
 class MayaTransactionServiceImpl extends MayaTransactionService
     implements IHttpRequest {
@@ -22,28 +22,17 @@ class MayaTransactionServiceImpl extends MayaTransactionService
   final CodenicLogger _codenicLogger;
 
   @override
-  Future<Either<AppFailure, List<MayaTransactionsEntities>>> getTransactions() {
+  Future<Either<AppFailure, List<MayaTransactionsEntities>>> getTransactions(
+      {required int userId}) {
     return sendRequest<List<MayaTransactionsEntities>>(
       messageLog: MessageLog(id: 'get-transaction-by-user'),
       action: () async {
-        final transactions = await _httpClient.getTransactions();
-
-
+        final transactions = await _httpClient.getTransactions(userId);
         if (transactions.isNotEmpty) {
           return Right(transactions.map((e) => e.toEntity()).toList());
-          // final filteredTransactions =
-          //     transactions.where((MayaAuthTransactionsDTO transaction) {
-          //   return transaction.userId == userid;
-          // });
-
-          // if (filteredTransactions.isEmpty) {
-          //   return Left(DatabaseFailure(code: 404, message: 'No data found'));
-          // }
-
-          // return Right(
-          //     filteredTransactions.map((data) => data.toEntity()).toList());
         }
-        return Left(DatabaseFailure(code: 404, message: 'No data found'));
+        return Left(
+            DatabaseFailure(code: 404, message: 'No transaction found'));
       },
     );
   }
@@ -55,14 +44,18 @@ class MayaTransactionServiceImpl extends MayaTransactionService
     return sendRequest<MayaTransactionsEntities>(
       messageLog: MessageLog(id: 'post-transaction-by-user'),
       action: () async {
-        final postResult = await _httpClient.postTransactions(
-          MayaAuthTransactionsDTO(
-            userId: mayaTransactionParameters.userId,
-            id: mayaTransactionParameters.id,
-            title: mayaTransactionParameters.title,
-            body: mayaTransactionParameters.body,
-          ).toJson(),
-        );
+        final transaction = MayaTransactionsDTO(
+          userId: mayaTransactionParameters.userId,
+          transactionPurpose: mayaTransactionParameters.purpose,
+          amount: mayaTransactionParameters.amount,
+        ).toJson();
+
+        final postResult = await _httpClient.postTransactions(transaction);
+
+        _codenicLogger
+          ..info(MessageLog(id: 'posted-transaction', data: transaction))
+          ..info(MessageLog(id: 'post-result', data: postResult?.toJson()));
+
         if (postResult != null) return Right(postResult.toEntity());
 
         return Left(DatabaseFailure(

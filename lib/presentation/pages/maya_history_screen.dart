@@ -23,8 +23,8 @@ final class MayaHistoryScreen extends StatelessWidget {
     return MayaAppScaffold<MayaHistoryScreen>(
       child: BlocProvider(
         create: (_) => serviceLocator<MayaFetchTransactionsCubit>()
-          ..dispatch(param: 
-            MayaTransactionParameters(
+          ..dispatch(
+            param: MayaTransactionParameters(
               userId: userid,
             ),
           ),
@@ -53,7 +53,8 @@ final class MayaHistoryScreen extends StatelessWidget {
                       );
                     }
                     return ListTile(
-                      title: Text("Amount Sent: ${transactions[index - 1].transactionPurpose ?? "-"}"),
+                      title: Text(
+                          "Amount Sent: ${transactions[index - 1].transactionPurpose ?? "-"}"),
                       subtitle: Text(transactions[index - 1].amount ?? "-"),
                     );
                   },
@@ -62,7 +63,18 @@ final class MayaHistoryScreen extends StatelessWidget {
                   },
                 );
               },
-              loadFailed: () => Center(child: Text('An error occur')),
+              loadFailed: () => Center(
+                child: TextButton(
+                  onPressed: () {
+                    context.read<MayaFetchTransactionsCubit>().dispatch(
+                          param: MayaTransactionParameters(userId: userid),
+                        );
+                  },
+                  child: Text(
+                    'No transactions found, tap to retry',
+                  ),
+                ),
+              ),
             );
           },
         ),

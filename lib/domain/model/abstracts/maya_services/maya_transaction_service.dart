@@ -30,7 +30,7 @@ abstract class MayaTransactionService {
   /// Returns:
   /// - [Left] with an [AppFailure] if there is an error fetching the transactions.
   /// - [Right] with a list of [MayaTransactionsEntities] if successful.
-  Future<Either<AppFailure, List<MayaTransactionsEntities>>> getTransactions();
+  Future<Either<AppFailure, List<MayaTransactionsEntities>>> getTransactions({required int userId});
 
   /// Posts a new transaction to the system.
   /// 

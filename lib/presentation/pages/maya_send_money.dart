@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maya/application/injectors/injector.dart';
 import 'package:maya/application/parameters/maya_transaction_parameters.dart';
 import 'package:maya/application/usecase/maya_post_transactions_cubit.dart';
+import 'package:maya/application/usecase/maya_transactions_local_cubit.dart';
 import 'package:maya/domain/model/entities/maya_user_entities.dart';
 import 'package:maya/presentation/widgets/widgetbook/maya_text_button.dart';
 
@@ -27,7 +26,6 @@ base class MayaSendMoney extends StatefulWidget {
 }
 
 final class _MayaSendMoneyState extends State<MayaSendMoney> {
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   MayaUserEntities? user;
@@ -42,8 +40,13 @@ final class _MayaSendMoneyState extends State<MayaSendMoney> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => serviceLocator<MayaPostTransactionsCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) => serviceLocator<MayaPostTransactionsCubit>()),
+        BlocProvider(
+            create: (_) => serviceLocator<MayaTransactionsLocalCubit>())
+      ],
       child: BlocListener<MayaPostTransactionsCubit, AppState>(
         listener: (context, listenerState) {
           if (listenerState is AppReturnFailure) {
@@ -55,6 +58,14 @@ final class _MayaSendMoneyState extends State<MayaSendMoney> {
               ),
             );
           } else if (listenerState is AppReturnSuccess) {
+            final transaction = context.read<MayaPostTransactionsCubit>().value;
+            final event = MayaTransactionParameters(
+              userId: transaction.userId ?? 0,
+              amount: transaction.amount ?? '',
+              purpose: transaction.transactionPurpose,
+            );
+            serviceLocator<MayaTransactionsLocalCubit>().setNewList(event);
+            
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
@@ -98,12 +109,11 @@ final class _MayaSendMoneyState extends State<MayaSendMoney> {
                             if (user != null) {
                               context
                                   .read<MayaPostTransactionsCubit>()
-                                  .dispatch(param:
-                                    MayaTransactionParameters(
+                                  .dispatch(
+                                    param: MayaTransactionParameters(
                                       userId: user?.userid ?? 0,
-                                      id: Random().nextInt(100),
-                                      title: user?.username ?? "",
-                                      body: textEditingController.text,
+                                      purpose: 'Send-money',
+                                      amount: textEditingController.text,
                                     ),
                                   );
                             }

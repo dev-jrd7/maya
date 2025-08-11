@@ -39,6 +39,11 @@ The **Maya Seeder** is a self-made **compiler** tool inspired by the Laravel Dat
    flutter pub clean && flutter pub get
    ```
 
+   If you encounter activation issue due to outdated dependencies just run
+   ```bash
+   flutter pub upgrade
+   ```
+
 3. **Activate Maya Seeder**:
    Use the following command to activate the Maya Seeder tool:
    ```bash
@@ -70,7 +75,14 @@ The **Maya Seeder** is a self-made **compiler** tool inspired by the Laravel Dat
    ```
    After running this, you should see a list of users populated in the terminal.
 
+   ![alt text](image-1.png)
+
 7. **Pick a User for Login**: Open the file `user_seeder.dart` and from the list of generated users, pick one to use as your login account.
+
+example: 
+username: 'testaccount1',
+password: 'P@ssw0rd123!',
+![alt text](image.png)
 
 8. **Run the App**:
    - You can now run the app by simply typing:

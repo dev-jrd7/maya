@@ -15,15 +15,13 @@
 /// storing in a database, or any other logic that involves transaction
 /// information.
 class MayaTransactionParameters {
-  final int? userId;
-  final int? id;
-  final String? title;
-  final String? body;
+  final int userId;
+  final String? purpose;
+  final String? amount;
 
   MayaTransactionParameters({
     required this.userId,
-    this.id,
-    this.title,
-    this.body,
+    this.purpose,
+    this.amount,
   });
 }
