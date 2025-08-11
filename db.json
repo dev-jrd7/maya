@@ -1,0 +1,35 @@
+{
+    "createdWhen": "2025-08-11T14:30:00Z",
+    "transactions": [
+        {
+            "userId": 1,
+            "id": 101,
+            "title": "Salary Payment",
+            "body": "5000"
+        },
+        {
+            "userId": 2,
+            "id": 102,
+            "title": "Grocery Shopping",
+            "body": "120.75"
+        },
+        {
+            "userId": 1,
+            "id": 103,
+            "title": "Electricity Bill",
+            "body": "89.30"
+        },
+        {
+            "userId": 3,
+            "id": 104,
+            "title": "Car Repair",
+            "body": "450.00"
+        },
+        {
+            "userId": 2,
+            "id": 105,
+            "title": "Freelance Payment",
+            "body": "1300"
+        }
+    ]
+}
